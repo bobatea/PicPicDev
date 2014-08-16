@@ -1,6 +1,6 @@
-daka-demo
+PicPic
 =========
 
 Developer: Luming, Hao, Diwei
 
-This is a demo for the app of PicPic.
+This is a demo APP.

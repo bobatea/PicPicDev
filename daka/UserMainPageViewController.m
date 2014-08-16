@@ -14,6 +14,9 @@
 
 @interface UserMainPageViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *LogOutButton;
+
+
 @end
 
 @implementation UserMainPageViewController
@@ -75,6 +78,10 @@
 //    sliding.unselectedLabelColor = [UIColor brownColor];
 //
 //    self.window.rootViewController = sliding;
+    
+}
+
+- (IBAction)LogOutButtonClick:(id)sender {
     
 }
 

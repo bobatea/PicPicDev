@@ -28,7 +28,7 @@ static NSNumber* uid;
 //sign in
 + (void)signInAccountWithUserName:(NSString *)user_name
                          password:(NSString *)password
-                       completion:(void (^)(BOOL success, NSString* desc))completionBlock
+                       completion:(void (^)(BOOL success, id info))completionBlock
 {
     NSString *apiName = @"signin";
     NSDictionary *params = @ {@"username" :user_name, @"password" :password};
@@ -40,7 +40,7 @@ static NSNumber* uid;
 //          Here is the call back function that calling "completionBlock" passed from SignIn and excute it:
 //          Recusively clousure into next block, until the "manager" in "networkDearler", So there needs to be a "success" returned back
 //                  uid = [NSNumber numberWithInt: [[response objectForKey:@"uid"] intValue]];
-                    completionBlock([[response objectForKey:@"success"] boolValue] , [response objectForKey:@"desc"]);
+                    completionBlock([[response objectForKey:@"success"] boolValue] , [response objectForKey:@"info"]);
              }];
 }
 
@@ -49,19 +49,22 @@ static NSNumber* uid;
 + (void)signUpAccountWithUserName:(NSString *)userName
                          password:(NSString *)password
                            gender:(NSString *)genderSelect
-                       completion:(void (^)(BOOL success, NSString* desc))completionBlock{
+                       completion:(void (^)(BOOL success, id info))completionBlock{
     
     NSString *apiName = @"signup";
     NSDictionary *params = @ {@"username" :userName,
-                              @"password" :password};
-                              //@"gender" :genderSelect};
+                              @"password" :password,
+                              @"gender" :genderSelect};
     
     [self networkDealer:apiName
                  params:params
              completion:^(NSDictionary *response) {
-                 completionBlock([[response objectForKey:@"success"] boolValue], [response objectForKey:@"desc"]);
+                 completionBlock([[response objectForKey:@"success"] boolValue], [response objectForKey:@"info"]);
              }];
 }
+
+//
+//+ (void)signOutAccount:{}
 
 
 //network core function - functions for Networking Communications
@@ -74,19 +77,19 @@ static NSNumber* uid;
     NSLog(@"Call api url: %@", url);
     NSLog(@"api params: %@", params);
     
-    [manager POST:url parameters:params
-          success:
-     ^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"Api response: %@", responseObject);
-         completionBlock((NSDictionary*)responseObject);
+    [manager POST:url
+       parameters:params
+          success:  ^(AFHTTPRequestOperation *operation, id responseObject)
+                        {
+                            NSLog(@"Api response: %@", responseObject);
+                            completionBlock((NSDictionary*)responseObject);
          
-     }
+                        }
           failure:
-     ^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"network error: %@", error);
-         [DataHelper showNetWorkAlertWindow:error];
-     }];
+                    ^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"network error: %@", error);
+                        [DataHelper showNetWorkAlertWindow:error];
+                        }];
 }
 
 

@@ -19,6 +19,9 @@
                            gender:(NSString *)gender
                        completion:(void (^)(BOOL success, NSString* desc))completionBlock;
 
+
+
+
 + (void)getNotification:(int) userId
              completion:(void (^)(NSMutableArray* notificationList))completionBlock;
 

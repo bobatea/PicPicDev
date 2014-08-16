@@ -122,13 +122,14 @@
         [NetWorkApi signUpAccountWithUserName:_userName.text
                                      password:_password1.text
                                        gender:self.genderSelect
-                                   completion:^(BOOL success, NSString* desc) {
+                                   completion:^(BOOL success, id info) {
                                        if (success) {
+                                           NSLog(@"%@", info);
                                            [self showAlert:@"Cangraulations!" message: @"Sign Up Success! Tap OK to login"];
                                            [self performSegueWithIdentifier:@"signUpSuccess" sender:self];
                                            
                                        } else {
-                                           [self showAlert:@"Error!" message: desc];
+                                           [self showAlert:@"Error!" message: info];
                                        }
                                    }];
     }

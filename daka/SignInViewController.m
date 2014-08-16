@@ -24,11 +24,20 @@
 @property (weak, nonatomic) IBOutlet UIButton *SignInButton;
 @property (weak, nonatomic) IBOutlet UIButton *SignUpButton;
 
+@property NSString *responseUserName;
+@property NSString *responseUserId;
+@property NSString *responseUserGender;
+@property NSString *responseToken;
+
 @end
 
 @implementation SignInViewController
 @synthesize SignInButton;
 @synthesize SignUpButton;
+@synthesize responseUserName;
+@synthesize responseUserId;
+@synthesize responseUserGender;
+@synthesize responseToken;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -111,12 +120,13 @@
     
     [NetWorkApi signInAccountWithUserName:self.username.text
                                  password:self.password.text
-                               completion:^(BOOL success, NSString* desc) {
+                               completion:^(BOOL success, id info) {
                                    if (success) {
                                        //[self performSelector:@selector(getNotification) withObject:self];
                                        NSLog(@"-------------login Success-------------");
-                                       NSLog(@"%@", desc);
-                                       self.apiDesc = desc;
+                                       NSLog(@"%@", info);
+                                       NSLog(@"%@", [info objectForKey:@"username"]);
+                                       self.apiDesc = [info objectForKey:@"username"];
                                        //After getting success, do this:
                                        [self performSegueWithIdentifier:@"SignInSuccess" sender:self];
                                    } else {

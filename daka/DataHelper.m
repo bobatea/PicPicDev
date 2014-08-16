@@ -12,6 +12,13 @@
 
 @implementation DataHelper
 
+//+ (NSDictionary *) stringToDict: (NSString*) info
+//{
+//    
+//    
+//    return result;
+//}
+
 + (NSString *) md5:(NSString *) input
 {
     const char *cStr = [input UTF8String];

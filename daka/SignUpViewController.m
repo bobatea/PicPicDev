@@ -8,6 +8,7 @@
 
 #import "SignUpViewController.h"
 #import "NetWorkApi.h"
+#import "LCAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define HEXCOLOR(c) [UIColor colorWithRed:((c>>24)&0xFF)/255.0 green:((c>>16)&0xFF)/255.0 blue:((c>>8)&0xFF)/255.0 alpha:((c)&0xFF)/255.0]
@@ -112,11 +113,14 @@
 
 - (IBAction)signUp:(id)sender {
     if([_userName.text isEqual:@""] || [_password1.text isEqual:@""] || [_password2.text isEqual:@""] ){
-        [self showAlert:@"Error" message:@"Plase fill all fields."];
+        LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Oops~" message:@"Plase fill all fields." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
+        [alert show];
     }else if(![_password1.text isEqualToString: _password2.text] ){
-        [self showAlert:@"Error" message: @"Password dissmatch, please try again."];
+        LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Oops~" message:@"Password dissmatch, please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
+        [alert show];
     }else if(_password1.text.length < 6){
-        [self showAlert:@"Error" message:  @"Password needs at least 6 characters."];
+        LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Oops~" message:@"Password needs at least 6 characters." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
+        [alert show];
     }else{
         NSLog(@"sign up a new user: @%@, password:@%@, gender:@%d",_userName.text,_password1.text, _gender.selectedSegmentIndex);
         [NetWorkApi signUpAccountWithUserName:_userName.text
@@ -125,9 +129,9 @@
                                    completion:^(BOOL success, id info) {
                                        if (success) {
                                            NSLog(@"%@", info);
-                                           [self showAlert:@"Cangraulations!" message: @"Sign Up Success! Tap OK to login"];
                                            [self performSegueWithIdentifier:@"signUpSuccess" sender:self];
-                                           
+                                           LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Hum~" message:@"Password needs at least 6 characters." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"PicPic Now!",nil];
+                                           [alert show];
                                        } else {
                                            [self showAlert:@"Error!" message: info];
                                        }

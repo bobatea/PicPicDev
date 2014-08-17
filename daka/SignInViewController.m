@@ -11,6 +11,7 @@
 #import "DataHelper.h"
 #import "Notification.h"
 #import "UserMainPageViewController.h"
+#import "LCAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define HEXCOLOR(c) [UIColor colorWithRed:((c>>24)&0xFF)/255.0 green:((c>>16)&0xFF)/255.0 blue:((c>>8)&0xFF)/255.0 alpha:((c)&0xFF)/255.0]
@@ -126,11 +127,7 @@
                                        //After getting success, do this:
                                        [self performSegueWithIdentifier:@"SignInSuccess" sender:self];
                                    } else {
-                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"user name or password dismatch"
-                                                                                       message:@"You need to type your user name or password again."
-                                                                                      delegate:nil
-                                                                             cancelButtonTitle:@"OK"
-                                                                             otherButtonTitles:nil];
+                                       LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Oops~" message:@"LogIn Error: username and password dismatch." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:@"OK",nil];
                                        [alert show];
                                    }
                                }];

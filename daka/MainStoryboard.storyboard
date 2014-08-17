@@ -120,6 +120,7 @@
                         <outlet property="LogOutButton" destination="nHz-eu-Cr1" id="d8a-T7-e2m"/>
                         <outlet property="desc" destination="cg9-gA-MCA" id="dy1-V4-TEv"/>
                         <segue destination="36b-0e-a15" kind="custom" identifier="swipToRandomPicPage" customClass="UserMainPageSegue" id="c9s-hN-qyp"/>
+                        <segue destination="zch-Eb-QY2" kind="modal" identifier="SignOut" customClass="SignOutSegue" modalTransitionStyle="crossDissolve" id="yBv-ja-4ce"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNy-cP-XKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -250,7 +251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fmo-df-GYv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264" y="710"/>
+            <point key="canvasLocation" x="389" y="710"/>
         </scene>
     </scenes>
     <resources>
@@ -262,6 +263,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="4gg-3t-my5"/>
+        <segue reference="DCj-T1-sKD"/>
     </inferredMetricsTieBreakers>
 </document>

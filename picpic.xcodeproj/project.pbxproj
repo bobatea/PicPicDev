@@ -50,6 +50,8 @@
 		667536E0199888910080A7AB /* UserMainPageSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 667536DF199888910080A7AB /* UserMainPageSegue.m */; };
 		667536E319988A760080A7AB /* RandomPicPageSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 667536E219988A760080A7AB /* RandomPicPageSegue.m */; };
 		66852E7C199C770400448BF5 /* PicPicLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 66852E7B199C770400448BF5 /* PicPicLogo.png */; };
+		66ACCD3119A146E900352EB8 /* LCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66ACCD3019A146E900352EB8 /* LCAlertView.m */; };
+		66ACCD3419A1548D00352EB8 /* SignOutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 66ACCD3319A1548D00352EB8 /* SignOutSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,10 @@
 		667536E119988A760080A7AB /* RandomPicPageSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomPicPageSegue.h; sourceTree = "<group>"; };
 		667536E219988A760080A7AB /* RandomPicPageSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomPicPageSegue.m; sourceTree = "<group>"; };
 		66852E7B199C770400448BF5 /* PicPicLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PicPicLogo.png; sourceTree = "<group>"; };
+		66ACCD2F19A146E900352EB8 /* LCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCAlertView.h; sourceTree = "<group>"; };
+		66ACCD3019A146E900352EB8 /* LCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCAlertView.m; sourceTree = "<group>"; };
+		66ACCD3219A1548D00352EB8 /* SignOutSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutSegue.h; sourceTree = "<group>"; };
+		66ACCD3319A1548D00352EB8 /* SignOutSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +224,7 @@
 		661EF9F01985AC000090CF93 /* ThirdPartyLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				66ACCD2E19A146CE00352EB8 /* PopUpView */,
 				667536D91998630B0080A7AB /* CustomSegue2 */,
 				05F2805D199856FE00B89431 /* CustomSegue */,
 				661EFA141985C4F80090CF93 /* UIKit+AFNetworking */,
@@ -425,8 +432,19 @@
 				667536E219988A760080A7AB /* RandomPicPageSegue.m */,
 				667536DE199888910080A7AB /* UserMainPageSegue.h */,
 				667536DF199888910080A7AB /* UserMainPageSegue.m */,
+				66ACCD3219A1548D00352EB8 /* SignOutSegue.h */,
+				66ACCD3319A1548D00352EB8 /* SignOutSegue.m */,
 			);
 			name = CustomSegueClass;
+			sourceTree = "<group>";
+		};
+		66ACCD2E19A146CE00352EB8 /* PopUpView */ = {
+			isa = PBXGroup;
+			children = (
+				66ACCD2F19A146E900352EB8 /* LCAlertView.h */,
+				66ACCD3019A146E900352EB8 /* LCAlertView.m */,
+			);
+			name = PopUpView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -540,11 +558,13 @@
 				661EFA131985C44C0090CF93 /* AFURLSessionManager.m in Sources */,
 				661EFA111985C44C0090CF93 /* AFURLRequestSerialization.m in Sources */,
 				661EFA3D1985D9450090CF93 /* Notification.m in Sources */,
+				66ACCD3119A146E900352EB8 /* LCAlertView.m in Sources */,
 				662F0DEE197B225B003C4632 /* BTAppDelegate.m in Sources */,
 				661EFA2C1985C4F80090CF93 /* UIRefreshControl+AFNetworking.m in Sources */,
 				661EFA121985C44C0090CF93 /* AFURLResponseSerialization.m in Sources */,
 				667536E0199888910080A7AB /* UserMainPageSegue.m in Sources */,
 				661EF9E71985779E0090CF93 /* SignInViewController.m in Sources */,
+				66ACCD3419A1548D00352EB8 /* SignOutSegue.m in Sources */,
 				661EFA2A1985C4F80090CF93 /* UIImageView+AFNetworking.m in Sources */,
 				661EF9EA198586220090CF93 /* SignUpViewController.m in Sources */,
 				05F280601998572F00B89431 /* RKSwipeBetweenViewControllers.m in Sources */,

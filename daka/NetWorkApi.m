@@ -113,7 +113,8 @@ static NSNumber* uid;
     //initialize serializer for adding HTTP header
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:params forHTTPHeaderField:@"Authorization"];
+    
+    [manager.requestSerializer setValue:params forHTTPHeaderField:@"access_token"];
     NSString* url = [BaseURLString stringByAppendingString: apiName];
     
     NSLog(@"Call api url: %@", url);

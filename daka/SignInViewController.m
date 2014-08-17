@@ -112,11 +112,6 @@
 
 
 - (IBAction)SignIn:(id)sender {
-
-    //    [NetWorkApi candidatesList:25
-    //                    completion:^(NSMutableArray *candidates){
-    //
-    //                    }];
     
     [NetWorkApi signInAccountWithUserName:self.username.text
                                  password:self.password.text
@@ -127,6 +122,7 @@
                                        NSLog(@"%@", info);
                                        NSLog(@"%@", [info objectForKey:@"username"]);
                                        self.apiDesc = [info objectForKey:@"username"];
+                                       responseToken = [info objectForKey:@"token"];
                                        //After getting success, do this:
                                        [self performSegueWithIdentifier:@"SignInSuccess" sender:self];
                                    } else {
@@ -138,10 +134,6 @@
                                        [alert show];
                                    }
                                }];
-    
-    
-    // [alert release];
-
 }
 
 
@@ -150,6 +142,7 @@
     if([segue.identifier isEqual:@"SignInSuccess"]) {
         UserMainPageViewController *destVC = segue.destinationViewController;
         destVC.recipeDesc = self.apiDesc;
+        destVC.userToken = responseToken;
     }
 
 }

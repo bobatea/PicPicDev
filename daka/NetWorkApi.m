@@ -63,11 +63,23 @@ static NSNumber* uid;
              }];
 }
 
-//
-//+ (void)signOutAccount:{}
+//sign out
++ (void)signOutAccountWithHeader:(NSString *) userToken
+                       completion:(void (^)(BOOL success, id info))completionBlock{
+    
+    NSString *apiName = @"protected/signout";
+    NSString *token = userToken;
+    
+    [self networkDealerProtected:apiName
+                 params:token
+             completion:^(NSDictionary *response) {
+                 completionBlock([[response objectForKey:@"success"] boolValue], [response objectForKey:@"info"]);
+             }];
+}
 
 
-//network core function - functions for Networking Communications
+//network core function for "unprotected" methods: functions for Networking Communications
+//unprotected methods: SignIn and SignUp
 +(void) networkDealer:(NSString*) apiName
                params:(NSDictionary*) params
            completion:(void (^)(NSDictionary * response))completionBlock {
@@ -90,6 +102,36 @@ static NSNumber* uid;
                         NSLog(@"network error: %@", error);
                         [DataHelper showNetWorkAlertWindow:error];
                         }];
+}
+
+//network core function for "protected" methods: functions for Networking Communications
+//unprotected methods: SignOut and PicUpload
++(void) networkDealerProtected:(NSString*) apiName
+               params:(NSString*) params
+           completion:(void (^)(NSDictionary * response))completionBlock {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //initialize serializer for adding HTTP header
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:params forHTTPHeaderField:@"Authorization"];
+    NSString* url = [BaseURLString stringByAppendingString: apiName];
+    
+    NSLog(@"Call api url: %@", url);
+    NSLog(@"api params: %@", params);
+    
+    [manager GET:url
+       parameters:nil
+          success:  ^(AFHTTPRequestOperation *operation, id responseObject)
+                {
+                    NSLog(@"Api response: %@", responseObject);
+                    completionBlock((NSDictionary*)responseObject);
+                }
+          failure:
+                    ^(AFHTTPRequestOperation *operation, NSError *error)
+                {
+                        NSLog(@"network error: %@", error);
+                    [DataHelper showNetWorkAlertWindow:error];
+                }];
 }
 
 

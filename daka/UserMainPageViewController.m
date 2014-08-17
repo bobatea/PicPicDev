@@ -8,6 +8,7 @@
 
 #import "UserMainPageViewController.h"
 #import "RandomPicPageViewController.h"
+#import "NetWorkApi.h"
 
 #import "RKSwipeBetweenViewControllers.h"
 #import "NTSlidingViewController.h"
@@ -15,7 +16,6 @@
 @interface UserMainPageViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *LogOutButton;
-
 
 @end
 
@@ -82,7 +82,14 @@
 }
 
 - (IBAction)LogOutButtonClick:(id)sender {
-    
+    [NetWorkApi signOutAccountWithHeader:self.userToken
+                              completion:^(BOOL success, id info){
+                                  if (success) {
+                                      NSLog(@"Logout Success");
+                                  } else {
+                                      NSLog(@"Logout Failed");
+                                  }
+                              }];
 }
 
 

@@ -15,4 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *desc;
 @property (nonatomic, strong) NSString *recipeDesc;
 
+//basic user authentication information
+@property NSString *userToken;
+
 @end

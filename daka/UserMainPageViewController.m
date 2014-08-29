@@ -83,6 +83,10 @@
         [NetWorkApi signOutAccountWithHeader:self.userToken
                                   completion:^(BOOL success, id info){
                                       if (success) {
+                                          //delete user defaults
+                                          [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];
+                                          [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+                                          [[NSUserDefaults standardUserDefaults] synchronize];
                                           [self performSegueWithIdentifier:@"SignOut" sender: self];
                                           NSLog(@"Logout Success");
                                       } else {

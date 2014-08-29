@@ -81,6 +81,30 @@
     
     [self.view addGestureRecognizer:tap];
     
+    //auto login
+    NSUserDefaults *autoLoginInfo = [NSUserDefaults standardUserDefaults];
+    NSString *autoUsername = [autoLoginInfo stringForKey:@"username"];
+    NSString *autoPassword = [autoLoginInfo stringForKey:@"password"];
+    
+    if (autoLoginInfo && autoPassword) {
+        [NetWorkApi signInAccountWithUserName:autoUsername
+                                     password:autoPassword
+                                   completion:^(BOOL success, id info) {
+                                       if (success) {
+                                           //[self performSelector:@selector(getNotification) withObject:self];
+                                           NSLog(@"-------------login Success-------------");
+                                           NSLog(@"%@", info);
+                                           NSLog(@"%@", [info objectForKey:@"username"]);
+                                           self.apiDesc = [info objectForKey:@"username"];
+                                           responseToken = [info objectForKey:@"token"];
+                                           //perform segue
+                                           [self performSegueWithIdentifier:@"SignInSuccess" sender:self];
+                                       } else {
+                                           LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Oops~" message:@"LogIn Error: username and password dismatch." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:@"OK",nil];
+                                           [alert show];
+                                       }
+                                   }];
+    }
     
 }
 
@@ -124,7 +148,11 @@
                                        NSLog(@"%@", [info objectForKey:@"username"]);
                                        self.apiDesc = [info objectForKey:@"username"];
                                        responseToken = [info objectForKey:@"token"];
-                                       //After getting success, do this:
+                                       //store username and password to UserDefaults
+                                       NSUserDefaults *LoginInfo = [NSUserDefaults standardUserDefaults];
+                                       [LoginInfo setObject:self.username.text forKey:@"username"];
+                                       [LoginInfo setObject:self.password.text forKey:@"password"];
+                                       //perform segue
                                        [self performSegueWithIdentifier:@"SignInSuccess" sender:self];
                                    } else {
                                        LCAlertView *alert = [[LCAlertView alloc]initWithTitle:@"Oops~" message:@"LogIn Error: username and password dismatch." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:@"OK",nil];

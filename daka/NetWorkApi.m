@@ -173,8 +173,10 @@ static NSNumber* uid;
             [manager POST:url
                parameters:nil
 constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                            [formData appendPartWithFormData:imageData
-                                                        name:@"image"];
+                            [formData appendPartWithFileData:imageData
+                                                        name:@"pic_file"
+                                                    fileName:@"pic_file"
+                                                    mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Success: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

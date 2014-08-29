@@ -71,10 +71,28 @@ static NSNumber* uid;
     NSString *token = userToken;
     
     [self networkDealerProtected:apiName
-                 params:token
-             completion:^(NSDictionary *response) {
+                          params:token
+                      completion:^(NSDictionary *response) {
                  completionBlock([[response objectForKey:@"success"] boolValue], [response objectForKey:@"info"]);
              }];
+}
+
+//upload image
++(void)uploadPictureWithHeader:(NSString *) userToken
+                       image:(NSData *) imageUpload
+                  completion:(void (^)(BOOL success, id info))completionBlock{
+
+    NSString *apiName = @"protected/picupload";
+    NSString *token = userToken;
+    NSData *image = imageUpload;
+    
+    [self networkDealerUploadPic:apiName
+                           image:image
+                          params:token
+                      completion:^(NSDictionary *response) {
+                          completionBlock([[response objectForKey:@"success"] boolValue], [response objectForKey:@"info"]);
+                      }];
+
 }
 
 
@@ -99,8 +117,8 @@ static NSNumber* uid;
                         }
           failure:
                     ^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"network error: %@", error);
-                        [DataHelper showNetWorkAlertWindow:error];
+                            NSLog(@"network error: %@", error);
+                            [DataHelper showNetWorkAlertWindow:error];
                         }];
 }
 
@@ -133,6 +151,37 @@ static NSNumber* uid;
                         NSLog(@"network error: %@", error);
                     [DataHelper showNetWorkAlertWindow:error];
                 }];
+}
+
+//network core function for upload picture
++(void)networkDealerUploadPic:(NSString *) apiName
+                        image:imageData
+                       params:(NSString *) params
+                   completion:(void (^)(NSDictionary * response))completionBlock {
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //initialize serializer for adding HTTP header
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [manager.requestSerializer setValue:params forHTTPHeaderField:@"access_token"];
+    NSString* url = [BaseURLString stringByAppendingString: apiName];
+    
+    NSLog(@"Call api url: %@", url);
+    NSLog(@"api params: %@", params);
+    
+            [manager POST:url
+               parameters:nil
+constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                            [formData appendPartWithFormData:imageData
+                                                        name:@"image"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [DataHelper showNetWorkAlertWindow:error];
+    }];
+    
 }
 
 

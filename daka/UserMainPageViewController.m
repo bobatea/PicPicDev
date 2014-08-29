@@ -17,6 +17,7 @@
 @interface UserMainPageViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *LogOutButton;
+@property (weak, nonatomic) IBOutlet UIButton *UploadPicture;
 
 @end
 
@@ -44,14 +45,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.desc.text = self.recipeDesc;
-    
-    #warning: TODO: Improve the swipe screen dynamic effects with below code and library
+
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
     leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [leftRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:leftRecognizer];
 }
 
+- (IBAction)UploadButtonClick:(id)sender {
+    UIImage *image = [UIImage imageNamed:@"PicPicLogo.png"];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    NSString *user_token = self.userToken;
+    
+    [NetWorkApi uploadPictureWithHeader:self.userToken
+                                  image:imageData
+                             completion:^(BOOL success, id info) {
+                                 if (success) {
+                                     NSLog(@"upload success");
+                                 } else
+                                     NSLog(@"upload fail");
+                             }];
+}
 
 - (IBAction)LogOutButtonClick:(id)sender {
     //customized alert view

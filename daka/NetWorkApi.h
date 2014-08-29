@@ -22,6 +22,10 @@
 + (void)signOutAccountWithHeader:(NSString *)userToken
                       completion:(void (^)(BOOL success, id info))completionBlock;
 
++ (void)uploadPictureWithHeader:(NSString *)userToken
+                          image:(NSData *) imageUpload
+                      completion:(void (^)(BOOL success, id info))completionBlock;
+
 + (void)getNotification:(int) userId
              completion:(void (^)(NSMutableArray* notificationList))completionBlock;
 

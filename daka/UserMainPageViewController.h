@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QBImagePickerController.h"
 
-@interface UserMainPageViewController : UIViewController <UIApplicationDelegate>
+@interface UserMainPageViewController : UIViewController <UIApplicationDelegate, QBImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
